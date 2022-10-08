@@ -4,6 +4,7 @@
 # In[1]:
 
 
+from turtle import width
 import numpy as np
 import pickle
 
@@ -41,12 +42,14 @@ def diabetes_prediction(input_data):
 
 import streamlit as st
 
-
+from PIL import Image
 # In[7]:
 
 
 def main():
     st.title("Diabetes_predictor")
+    image = Image.open('diabetes_detected.jpg')
+    st.image(image,width=250)
 #getting inputs from the user
     Pregnancies=st.text_input("No of Pregnancies")
     Glucose=st.text_input("Glucose level")
@@ -60,7 +63,10 @@ def main():
     diagnosis=""
     if(st.button("Diabetes_test_result")):
         diagnosis=diabetes_prediction([Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age])
-    st.success(diagnosis)
+        if(diagnosis== "The patient is having diabetes"):
+            st.warning(diagnosis +"🥹")
+        else:
+            st.success(diagnosis +"😊")
 if __name__ == '__main__':
     main()
 
