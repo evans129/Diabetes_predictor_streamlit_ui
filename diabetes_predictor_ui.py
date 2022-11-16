@@ -4,6 +4,7 @@
 # In[1]:
 
 
+from telnetlib import BM
 from turtle import width
 import numpy as np
 import pickle
@@ -52,20 +53,40 @@ def main():
     st.image(image,width=250)
 #getting inputs from the user
     Pregnancies=st.text_input("No of Pregnancies")
+    if(Pregnancies.strip()==""):
+        st.info("please enter the no of Pregnancies")
     Glucose=st.text_input("Glucose level")
+    if(Glucose.strip()==""):
+        st.info("please enter Glucose level")
     BloodPressure=st.text_input("Bloodpressure level")
+    if(BloodPressure.strip()==""):
+        st.info("please enter the BloodPressure")
     SkinThickness=st.text_input("SkinThickness value")
+    if(SkinThickness.strip()==""):
+        st.info("please enter the SkinThickness")
     Insulin=st.text_input("Insulin level")
+    if(Insulin.strip()==""):
+        st.info("please enter the Insulin level")
     BMI=st.text_input("BMI value")
+    if(BMI.strip()==""):
+         st.info("Please enter the BMI value")
     DiabetesPedigreeFunction=st.text_input("DiabetesPredigreeFunction")
+    if(DiabetesPedigreeFunction.strip()==""):
+        st.info("please enter the value of DiabetesPedigreeFunction")
     Age=st.text_input("Age of the person")
+    if(Age.strip()==""):
+        st.info("please enter the age of the person")
+         
 #code for prediction 
     diagnosis=""
     if(st.button("Diabetes_test_result")):
-        diagnosis=diabetes_prediction([Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age])
-        if(diagnosis== "The patient is having diabetes"):
-            st.warning(diagnosis +"🥹")
+        if(Pregnancies=="" or Glucose=="" or BloodPressure=="" or SkinThickness=="" or Insulin=="" or BMI=="" or DiabetesPedigreeFunction=="" or Age==""):
+         st.info("please fill all the fields")
         else:
+         diagnosis=diabetes_prediction([Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age])
+         if(diagnosis== "The patient is having diabetes"):
+            st.warning(diagnosis +"🥹")
+         else:
             st.success(diagnosis +"😊")
 if __name__ == '__main__':
     main()
